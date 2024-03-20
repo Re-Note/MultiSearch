@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+        }
+        .result {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .word {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .definition {
+            font-size: 16px;
+            color: #666;
+        }
+        .error {
+            color: red;
+            font-size: 16px;
+        }
+        .url {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #007bff;
+        }
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<h2>Search Results</h2>
+<div th:each="result : ${results}" class="result">
+    <div class="word" th:text="'Word: ' + ${result.word}"></div>
+    <div th:if="${result.error}" class="error" th:text="${result.error}"></div>
+    <div th:if="${result.definition}" class="definition" th:utext="${result.definition}"></div>
+    <!-- Add URL for each result -->
+    <div class="url" th:if="${result.url}">
+        <a th:href="${result.url}" target="_blank" th:text="${result.url}"></a>
+    </div>
+</div>
+</body>
+</html>
